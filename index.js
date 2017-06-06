@@ -1,5 +1,7 @@
 //! crry - Copyright (c) 2017, Zach Dahl; This source code is licensed under the ISC-style license found in the LICENSE file in the root directory of this source tree
-var __ = '@@crry/placeholder'
+var type = '@@functional/placeholder'
+var __ = {}
+__[type] = true
 
 function makeCurriedFunction (len, args, placeholders, fn) {
   return function () {
@@ -11,7 +13,7 @@ function makeCurriedFunction (len, args, placeholders, fn) {
 
     for (var i = 0; i < il; ++i) {
       var arg = arguments[i]
-      if (arg === __) {
+      if (arg === __ || arg && arg[type]) {
         if (placeholders.length > 0) {
           pPlaceholders.unshift(placeholders[0])
           placeholders = placeholders.slice(1)
