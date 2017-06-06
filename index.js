@@ -7,7 +7,7 @@ function makeCurriedFunction (len, args, placeholders, fn) {
     var pPlaceholders = []
 
     var max = len - pArgs.length
-    var il = Math.min(il, max)
+    var il = Math.min(arguments.length, max)
 
     for (var i = 0; i < il; ++i) {
       var arg = arguments[i]
