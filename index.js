@@ -12,7 +12,12 @@ function makeCurriedFunction (len, args, placeholders, fn) {
     for (var i = 0; i < il; ++i) {
       var arg = arguments[i]
       if (arg === __) {
-        pPlaceholders.push(pArgs.length + pPlaceholders.length + placeholders.length)
+        if (placeholders.length > 0) {
+          pPlaceholders.unshift(placeholders[0])
+          placeholders = placeholders.slice(1)
+        } else {
+          pPlaceholders.push(pArgs.length + pPlaceholders.length + placeholders.length)
+        }
       } else if (placeholders.length > 0) {
         pArgs.splice(placeholders[0], 0, arg)
         placeholders = placeholders.slice(1)
