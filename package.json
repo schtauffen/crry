@@ -1,15 +1,49 @@
 {
   "name": "crry",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A micro library for your currying needs",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "dist/"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "run-s lint test build",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "build": "run-s babel webpack",
+    "babel": "cross-env NODE_ENV=production babel -d ./lib ./src -s",
+    "webpack": "cross-env NODE_ENV=production webpack -p --display-optimization-bailout",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch"
   },
   "author": "Zach Dahl <z.schtauffen@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/schtauffen/crry.git"
+  "license": "ISC",
+  "repository": "schtauffen/crry",
+  "standard": {
+    "ignore": [
+      "lib/",
+      "**/__tests__/"
+    ]
   },
-  "license": "ISC"
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "testMatch": [
+      "**/__tests__/*[-.]spec.js"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "cross-env": "^5.0.1",
+    "jest": "^20.0.4",
+    "npm-run-all": "^4.0.2",
+    "sinon": "^2.3.6",
+    "standard": "^10.0.2",
+    "webpack": "^3.0.0"
+  }
 }
