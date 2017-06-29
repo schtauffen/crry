@@ -4,7 +4,7 @@ var __ = {}
 __[type] = true
 
 function is__ (p) {
-  return __ === p || p && p[type]
+  return __ === p || (p && p[type])
 }
 
 function find__ (arr, len, start) {
