@@ -2,20 +2,24 @@
   "name": "crry",
   "version": "1.0.5",
   "description": "A micro library for your currying needs",
-  "main": "lib/index.js",
+  "main": "cjs/index.js",
+  "module": "lib/index.js",
   "files": [
     "lib/",
+    "cjs/",
     "dist/"
   ],
   "scripts": {
     "prepublishOnly": "run-s lint test build",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "build": "run-s babel webpack",
+    "build": "run-s babel cjs webpack",
     "babel": "cross-env NODE_ENV=production babel -d ./lib ./src -s",
+    "cjs": "cross-env BABEL_ENV=node cross-env NODE_ENV=production babel -d ./cjs ./src -s",
     "webpack": "cross-env NODE_ENV=production webpack -p --display-optimization-bailout",
     "test": "jest --coverage",
-    "test:watch": "jest --coverage --watch"
+    "test:watch": "jest --coverage --watch",
+    "release": "xyz --repo git@github.com:schtauffen/crry.git --increment"
   },
   "author": "Zach Dahl <z.schtauffen@gmail.com>",
   "license": "ISC",
@@ -44,6 +48,7 @@
     "npm-run-all": "^4.0.2",
     "sinon": "^2.3.6",
     "standard": "^10.0.2",
-    "webpack": "^3.0.0"
+    "webpack": "^3.0.0",
+    "xyz": "^2.1.0"
   }
 }
