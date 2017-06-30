@@ -17,6 +17,13 @@
         "_*.js"
       ]
     },
+    "node": {
+      "ignore": [
+        "*.spec.js",
+        "_*.js"
+      ],
+      "plugins": ["transform-es2015-modules-commonjs"]
+    },
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
     }

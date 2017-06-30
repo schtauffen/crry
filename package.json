@@ -19,7 +19,7 @@
     "webpack": "cross-env NODE_ENV=production webpack -p --display-optimization-bailout",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
-    "release": "xyz --repo git@github.com:schtauffen/crry.git --increment"
+    "release": "xyz --repo https://github.com/schtauffen/crry.git --increment"
   },
   "author": "Zach Dahl <z.schtauffen@gmail.com>",
   "license": "ISC",
