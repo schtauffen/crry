@@ -56,10 +56,7 @@ function arity (n, fn) {
     case 9: return function (a, b, c, d, e, f, g, h, i) { return fn.apply(this, arguments) }
     case 10: return function (a, b, c, d, e, f, g, h, i, j) { return fn.apply(this, arguments) }
     default:
-      var args = []
-      for (var i = 0; i < n; ++i) args.push('a' + i)
-      // eslint-disable-next-line
-      return eval('0||function(' + args.join(',') + '){return fn.apply(this, arguments)}')
+      throw new Error('curry only supports functions up to length 10')
   }
 }
 

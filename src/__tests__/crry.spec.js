@@ -28,13 +28,12 @@ describe('curry', () => {
       (a, b, c, d, e, f, g) => 7,
       (a, b, c, d, e, f, g, h) => 8,
       (a, b, c, d, e, f, g, h, i) => 9,
-      (a, b, c, d, e, f, g, h, i, j) => 10,
-      (a, b, c, d, e, f, g, h, i, j, k) => 11
+      (a, b, c, d, e, f, g, h, i, j) => 10
     ]
     fns.forEach((fn, idx) => expect(curry(fn).length).toBe(idx))
   })
 
-  it('should handle functions of all lengths', () => {
+  it('should handle functions of lengths 0 to 10', () => {
     const fns = [
       () => 0,
       (a) => 1,
@@ -46,8 +45,7 @@ describe('curry', () => {
       (a, b, c, d, e, f, g) => 7,
       (a, b, c, d, e, f, g, h) => 8,
       (a, b, c, d, e, f, g, h, i) => 9,
-      (a, b, c, d, e, f, g, h, i, j) => 10,
-      (a, b, c, d, e, f, g, h, i, j, k) => 11
+      (a, b, c, d, e, f, g, h, i, j) => 10
     ]
     fns.map(fn => curry(fn)).forEach((fn, idx) => {
       if (idx === 0) return expect(fn()).toBe(0)
@@ -58,5 +56,9 @@ describe('curry', () => {
 
       expect(fn).toBe(idx)
     })
+  })
+
+  it('should error on length > 10', () => {
+    expect(() => curry((a, b, c, d, e, f, g, h, i, j, k) => {})).toThrow()
   })
 })
