@@ -14,13 +14,15 @@
     "production": {
       "ignore": [
         "*.spec.js",
-        "_*.js"
+        "_*.js",
+        "umd.js"
       ]
     },
     "node": {
       "ignore": [
         "*.spec.js",
-        "_*.js"
+        "_*.js",
+        "umd.js"
       ],
       "plugins": ["transform-es2015-modules-commonjs"]
     },

@@ -10,14 +10,15 @@
     "dist/"
   ],
   "scripts": {
-    "prepublishOnly": "run-s lint test build",
+    "prepublishOnly": "npm run build",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "build": "run-s babel cjs webpack",
     "babel": "cross-env NODE_ENV=production babel -d ./lib ./src -s",
     "cjs": "cross-env BABEL_ENV=node cross-env NODE_ENV=production babel -d ./cjs ./src -s",
     "webpack": "cross-env NODE_ENV=production webpack -p --display-optimization-bailout",
-    "test": "jest --coverage",
+    "test": "run-s lint test:unit",
+    "test:unit": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "release": "xyz --repo https://github.com/schtauffen/crry.git --increment"
   },
@@ -27,6 +28,7 @@
   "standard": {
     "ignore": [
       "lib/",
+      "cjs/",
       "**/__tests__/"
     ]
   },
