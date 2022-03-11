@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "declarationDir": "./dest/es6",
+    "outDir": "./dest/es6",
+    "module": "es6"
+  }
+}

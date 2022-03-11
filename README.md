@@ -10,6 +10,11 @@ crry exports two functions and a constant:
 import { curry, curryN, __ } from 'crry'
 ```
 
+A umd version is available:
+```html
+<script src="//unpkg.com/crry/dest/umd/index.js"></script>
+```
+
 ### curry
 `curry` takes a function as its lone argument and returns a curried version of that function.
 ```js
