@@ -2,7 +2,8 @@
   "name": "crry",
   "version": "1.1.1",
   "description": "A micro library for your currying needs",
-  "module": "lib/index.js",
+  "main": "dest/umd/index.js",
+  "module": "dest/es6/index.js",
   "files": [
     "dest/"
   ],
