@@ -18,7 +18,7 @@
     "umd": "tsc --build tsconfig.umd.json",
     "test": "jest --coverage",
     "tdd": "jest --coverage --watch",
-    "release": "xyz --repo https://github.com/schtauffen/crry.git --increment"
+    "release": "xyz -b main --repo git@github.com/schtauffen/crry.git --increment"
   },
   "author": "Zach Dahl <z.schtauffen@gmail.com>",
   "license": "ISC",
