@@ -14,7 +14,27 @@ type TupleSplit<T extends any[], L extends number, F = (...a: T) => void> = [
   F extends (a: infer A, b: infer B, c: infer C, ...z: infer Z) => void
     ? { init: [A, B, C]; rest: Z }
     : never,
-  // etc etc for tuples of length 4 and greater
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, ...z: infer Z) => void
+    ? { init: [A, B, C, D]; rest: Z }
+    : never,
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, ...z: infer Z) => void
+    ? { init: [A, B, C, D, E]; rest: Z }
+    : never,
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, f: infer F, ...z: infer Z) => void
+    ? { init: [A, B, C, D, E, F]; rest: Z }
+    : never,
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, f: infer F, g: infer G, ...z: infer Z) => void
+    ? { init: [A, B, C, D, E, F, G]; rest: Z }
+    : never,
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, f: infer F, g: infer G, h: infer H, ...z: infer Z) => void
+    ? { init: [A, B, C, D, E, F, G, H]; rest: Z }
+    : never,
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, f: infer F, g: infer G, h: infer H, i: infer I, ...z: infer Z) => void
+    ? { init: [A, B, C, D, E, F, G, H, I]; rest: Z }
+    : never,
+  F extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, f: infer F, g: infer G, h: infer H, i: infer I, j: infer J, ...z: infer Z) => void
+    ? { init: [A, B, C, D, E, F, G, H, I, J]; rest: Z }
+    : never,
   ...{ init: T; rest: [] }[]
 ][L];
 
