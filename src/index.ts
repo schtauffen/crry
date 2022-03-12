@@ -1,117 +1,9 @@
-// crry - Copyright (c) 2017, Zach Dahl; This source code is licensed under the ISC-style license found in the LICENSE file in the root directory of this source tree
-interface I__ {
-  "@@functional/placeholder": true;
-}
-
-type TupleSplit<T extends any[], L extends number, F = (...a: T) => void> = [
-  { init: []; rest: T },
-  F extends (a: infer A, ...z: infer Z) => void
-    ? { init: [A]; rest: Z }
-    : never,
-  F extends (a: infer A, b: infer B, ...z: infer Z) => void
-    ? { init: [A, B]; rest: Z }
-    : never,
-  F extends (a: infer A, b: infer B, c: infer C, ...z: infer Z) => void
-    ? { init: [A, B, C]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    e: infer E,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D, E]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    e: infer E,
-    f: infer F,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D, E, F]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    e: infer E,
-    f: infer F,
-    g: infer G,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D, E, F, G]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    e: infer E,
-    f: infer F,
-    g: infer G,
-    h: infer H,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D, E, F, G, H]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    e: infer E,
-    f: infer F,
-    g: infer G,
-    h: infer H,
-    i: infer I,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D, E, F, G, H, I]; rest: Z }
-    : never,
-  F extends (
-    a: infer A,
-    b: infer B,
-    c: infer C,
-    d: infer D,
-    e: infer E,
-    f: infer F,
-    g: infer G,
-    h: infer H,
-    i: infer I,
-    j: infer J,
-    ...z: infer Z
-  ) => void
-    ? { init: [A, B, C, D, E, F, G, H, I, J]; rest: Z }
-    : never,
-  ...{ init: T; rest: [] }[]
-][L];
-
-type Curried<A extends any[], R> = <L extends TupleSplit<A, number>["init"]>(
-  ...args: L
-) => 0 extends L["length"]
-  ? never
-  : 0 extends TupleSplit<A, L["length"]>["rest"]["length"]
-  ? R
-  : Curried<TupleSplit<A, L["length"]>["rest"], R>;
+// crry - Copyright (c) 2017-2022, Zach Dahl; This source code is licensed under the ISC-style license found in the LICENSE file in the root directory of this source tree
+import { A, F } from "ts-toolbelt";
 
 const type = "@@functional/placeholder";
-const __: I__ = {} as any;
-__[type] = true;
+const __ = {} as A.x;
+(__ as any)[type] = true;
 
 function is__(p: any): boolean {
   return __ === p || (p && p[type]);
@@ -125,13 +17,13 @@ function find__(arr: any[], len: number, start: number) {
   return start;
 }
 
-function makeCurriedFunction<A extends any[], R>(
+function makeCurriedFunction<Fn extends F.Function>(
   length: number,
-  args: A,
-  fn: (...args: A) => R
-): Curried<A, R> {
-  return <Curried<A, R>>function (this: any) {
-    const combined = <A>args.slice();
+  args: any[],
+  fn: Fn
+): F.Curry<Fn> {
+  return function (this: any) {
+    const combined = args.slice();
     let next = find__(combined, length, 0);
     const aLen = arguments.length;
     let adx = 0;
@@ -257,16 +149,13 @@ function arity<T>(n: number, fn: T): T {
   }
 }
 
-function curry<A extends any[], R>(fn: (...args: A) => R): Curried<A, R> {
+function curry<Fn extends F.Function>(fn: Fn): F.Curry<Fn> {
   return curryN(fn.length, fn);
 }
 
-function curryN<A extends any[], R>(
-  len: number,
-  fn: (...args: A) => R
-): Curried<A, R> {
+function curryN<Fn extends F.Function>(len: number, fn: Fn): F.Curry<Fn> {
   let i = 0;
-  const args = <A>Array(len);
+  const args = Array(len);
   while (i < len) {
     args[i++] = __;
   }
